@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{$detail.title}</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  {include file="public/header" /}
+</head>
+
+<body id="blog-article-sidebar">
+{include file="public/nav" /}
+<!-- content srart -->
+<div class="am-g am-g-fixed blog-fixed blog-content">
+    <div class="am-u-md-8 am-u-sm-12">
+        <article class="am-article blog-article-p">
+            <div class="am-article-hd">
+                <h1 class="am-article-title blog-text-center">{$detail.title}</h1>
+                <p class="am-article-meta blog-text-center">
+                    <span><a href="#" class="blog-color">article &nbsp;</a></span>-
+                    <span><a href="#">@amazeUI &nbsp;</a></span>-
+                    <span><a href="#">2015/10/9</a></span>
+                </p>
+            </div>        
+            <div class="am-article-bd">
+                <p>{$detail.content}</p>
+            </div>
+        </article>
+        
+        <div class="am-g blog-article-widget blog-article-margin">
+            <div class="am-u-sm-12 am-u-sm-centered blog-text-center">
+                <div class="a-write hidden-xs">
+                    <eq name="Article.a_type" value="1">本文为原创，转载请注明出处:&nbsp;&nbsp;<a>http://ilunhui.cn/deatil/index/id/{$detail.id}.html</a>
+                        <br>
+                    </eq>
+                    发表自：&nbsp;{$detail.from}&nbsp;&nbsp;地址：{$detail.ip}&nbsp;&nbsp;关键词：&nbsp;{$detail['keyword']?$detail['keyword']:'暂无标签'}&nbsp;&nbsp;
+                </div>
+                <hr>
+                <div class="bdsharebuttonbox fenxiang">
+                    <a class="bds_more" href="#" data-cmd="more"></a>
+                    <a title="分享到QQ空间" class="bds_qzone" href="#" data-cmd="qzone"></a>
+                    <a title="分享到腾讯微博" class="bds_tqq" href="#" data-cmd="tqq"></a>
+                    <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a>
+                    <a title="分享到百度贴吧" class="bds_tieba" href="#" data-cmd="tieba"></a>
+                    <a title="分享到百度云收藏" class="bds_bdysc" href="#" data-cmd="bdysc"></a>
+                    <a title="分享到QQ好友" class="bds_sqq" href="#" data-cmd="sqq"></a>
+                </div>
+                <script>
+                    window._bd_share_config = {
+                        "common": {
+                            "bdSnsKey": {},
+                            "bdText": "轮回博客的分享",
+                            "bdMini": "2",
+                            "bdMiniList": false,
+                            "bdPic": "http://ilunhui.cn//Public/Img/logo.png",
+                            "bdStyle": "1",
+                            "bdSize": "24"
+                        },
+                        "share": {}
+                    };
+                    with(document)
+                    0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+                </script>
+            </div>
+        </div>
+
+        <hr>
+            <ul class="am-pagination blog-article-margin">
+              <p>上一篇：
+                {if condition="$down['id'] eq 0"}
+                    <a title='没有了'>&nbsp;没有了</a>
+                {else /}
+                    <a title='{$down.title}' href="{:url('detail/index',['id'=>$down['id']])}" class="down_text">{$down.title}</a>
+                {/if}
+
+              </p>
+              <p>下一篇：
+                {if condition="$up['id'] eq 0"}
+                    <a title='没有了'>&nbsp;没有了</a>
+                {else /}
+                    <a title='{$up.title}' href="{:url('detail/index',['id'=>$up['id']])}" class="down_text">{$up.title}</a>
+                {/if}
+              </p>
+            </ul>      
+        <hr>
+
+        <form class="am-form am-g">
+            <h3 class="blog-comment">评论</h3>
+            <fieldset>
+                <div class="am-form-group am-u-sm-4 blog-clear-left">
+                    <input type="text" class="" placeholder="名字">
+                </div>
+                <div class="am-form-group am-u-sm-4">
+                    <input type="email" class="" placeholder="邮箱">
+                </div>
+
+                <div class="am-form-group am-u-sm-4 blog-clear-right">
+                    <input type="password" class="" placeholder="网站">
+                </div>
+            
+                <div class="am-form-group">
+                    <textarea class="" rows="5" placeholder="一字千金"></textarea>
+                </div>
+            
+                <p><button type="submit" class="am-btn am-btn-primary">发表评论</button></p>
+            </fieldset>
+        </form>
+
+        <hr>
+    </div>
+<!-- 右侧 -->
+{include file="public/right" /}  
+</div>
+<!-- 底部 -->
+{include file="public/footer" /}

@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>轮回博客</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="renderer" content="webkit">
+        {include file="public/header" /}
+    </head>
+<body id="blog">
+
+{include file="public/nav" /}
+
+<div class="am-g am-g-fixed blog-fixed">
+    <div class="am-u-md-8 am-u-sm-12">
+        <hr>
+       {foreach name="lists" item="vo"}
+           <article class="am-g blog-entry-article" id="article_list">
+               <div class="am-u-md-12 am-u-sm-12">
+                    <h1>                      
+                        <span class="am-badge am-badge-danger am-radius">原创</span>                    
+                        <a href="{:url('detail/index',['id'=>$vo.id])}">{$vo.title}</a>
+                    </h1>
+                </div>
+                <div class="am-u-lg-5 am-u-md-12 am-u-sm-12 blog-entry-img">
+                    <img src="__IMG__/1.jpg" class="am-u-sm-12" height="200px">
+                </div>
+                <div class="am-u-lg-7 am-u-md-12 am-u-sm-12 blog-entry-text">
+                    <p style="text-indent: 2em;">{$vo.remark}</p>
+                </div>
+                <div class="am-u-lg-12 am-u-md-12 am-u-sm-12 blog-cate-text"><span class="am-icon-paper-plane-o"></span> 
+                {$vo.create_time|date='Y-m-d H:i:s',###}  作者：[ {$vo.writer} ]  分类：[ {$vo.name} ]  点击：[{$vo.views}]
+                </div>
+           </article>
+       {/foreach}
+      
+        <div id="Pages" style="text-align:right;"></div>
+
+    </div>
+
+<!-- 右侧 -->
+{include file="public/right" /}   
+
+<!-- 底部 -->
+{include file="public/footer" /}
+<script type="text/javascript">
+
+    //分页
+    laypage({
+        cont: $('#Pages'),  // 分页容器
+        pages: "{$allpage}",// 总页数
+        skip: false, //是否开启跳页
+        skin: '#1AB5B7',//分页组件颜色
+        groups: 3,//连续显示分页数
+        curr: function(){
+            var page = "{$nowpage}"; // 当前页(后台获取到的)
+            return page ? page : 1; // 返回当前页码值
+        }(),
+        jump: function(e, first){ //触发分页后的回调(单击页码后)
+            if(!first){ //一定要加此判断，否则初始时会无限刷新
+            //var urls = "{:url('index/index')}";
+            location.href = '?page='+e.curr;
+        }
+    }
+ });
+
+</script>
